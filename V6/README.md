@@ -11,8 +11,8 @@ The folders in this directory contain the following files.  NOTE IN ORDER TO RUN
 
 ## L1B_ingest
 - `MAKE_SMAP_L1B_ingest_V60.F90`: Replaces `MAKE_SMAP_L1B_ingest_V50.F90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
-- `read_smap_l1b.f90`: Shifts the low-rate (LR) collection brightness temperatures to be consistent with the SMAP the high-rate (HR) collection (fixes early mission salinity biases near land; details found in the [SMAP V6 ATBD](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://data.remss.com/smap/SSS/V06.0/documents/Release_V6.0.pdf)).  This file replaces `smap_l1b_module.f90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
-- `smap_l1b_module.f90`: Contains the LR to HR shift values.  This file replaces `read_smap_l1b.f90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
+- `read_smap_l1b.f90`: Shifts the low-rate (LR) collection brightness temperatures to be consistent with the SMAP the high-rate (HR) collection (fixes early mission salinity biases near land; details found in the [SMAP V6 ATBD](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://data.remss.com/smap/SSS/V06.0/documents/Release_V6.0.pdf)).  This file replaces `read_smap_l1b.f90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
+- `smap_l1b_module.f90`: Contains the LR to HR shift values.  This file replaces `smap_l1b_module.f90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
 
 
 ## L2C
