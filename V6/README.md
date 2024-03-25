@@ -8,10 +8,12 @@ to the NASA/RSS SMAP Salinity Version 6.0 Validated Release.  If a routine, subr
 
 The folders in this directory contain the following files.  NOTE IN ORDER TO RUN THE NASA/RSS SMAP V6 PROCESSING, THE FILES IN THIS SUBDIRECTORY, MUST REPLACE THE APPROPRIATE FILES (NOTED BELOW) IN THE FOLDERS LOCATED IN THE [PARENT DIRECTORY](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0):
 
+
 ## L1B_ingest
 - `MAKE_SMAP_L1B_ingest_V60.F90`: Replaces `MAKE_SMAP_L1B_ingest_V50.F90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
-- `smap_l1b_module.f90`: Shifts the low-rate (LR) collection brightness temperatures to be consistent with the SMAP the high-rate (HR) collection (fixes early mission salinity biases near land; details found in the [SMAP V6 ATBD](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://data.remss.com/smap/SSS/V06.0/documents/Release_V6.0.pdf)).  This file replaces `smap_l1b_module.f90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
-- `read_smap_l1b.f90`: Contains the LR to HR shift values.  This file replaces `read_smap_l1b.f90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
+- `read_smap_l1b.f90`: Shifts the low-rate (LR) collection brightness temperatures to be consistent with the SMAP the high-rate (HR) collection (fixes early mission salinity biases near land; details found in the [SMAP V6 ATBD](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://data.remss.com/smap/SSS/V06.0/documents/Release_V6.0.pdf)).  This file replaces `smap_l1b_module.f90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
+- `smap_l1b_module.f90`: Contains the LR to HR shift values.  This file replaces `read_smap_l1b.f90` in the [V5.0 L1B_ingest.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L1B_ingest.zip) folder.
+
 
 ## L2C
 - `MAKE_SMAP_L2C_V60.f90`: Replaces `MAKE_SMAP_L2C_V50.f90` in the [V5.0 L2C.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/L2C.zip) folder.
@@ -27,6 +29,7 @@ The folders in this directory contain the following files.  NOTE IN ORDER TO RUN
 
 ## Ocean Target Calibration
 - `PERFORM_OCEAN_TARGET_CALIBRATION.F90`: This file replaces `PERFORM_OCEAN_TARGET_CALIBRATION.F90` in the [V5.0 PERFORM_OCEAN_TARGET_CALIBRATION.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/blob/main/PERFORM_OCEAN_TARGET_CALIBRATION.zip) folder.  This new file uses the updated subroutines listed in the `L2C` section above and the new tables in the `Tables L2C` section below.
+
 
 ## Tables L2C
 - `delta_refl_temp_V51C.dat`: Table to be included in `fd_delta_temp_refl_V51C.f90`.  This table replaces `delta_refl_temp_V3A.dat` in the [V5.0 validated release tables_L2C.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/releases/tag/V5.0-validated-release) folder.
