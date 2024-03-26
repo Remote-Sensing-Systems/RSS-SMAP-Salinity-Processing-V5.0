@@ -35,3 +35,6 @@ The folders in this directory contain the following files.  NOTE, IN ORDER TO RU
 - `delta_refl_temp_V51C.dat`: Table to be included in `fd_delta_temp_refl_V51C.f90`.  This table replaces `delta_refl_temp_V3A.dat` in the [V5.0 validated release tables_L2C.zip](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0/releases/tag/V5.0-validated-release) folder.
 - `delta_TA_gal_refl_res_V51_IQ.dat`: Table used in `find_ta_gal_refl_V51.f90` as an additional correction to the reflected galaxy TA.  This is a new table used in the SMAP V6 processing.
 
+
+## Other Notes
+- The NASA/RSS SMAP Salinity Version 6.0 Validated Release uses the National Snow and Ice Data Center (NSIDC) Version 6 L1B Radiometer Half-Orbit Time-Ordered Brightness Temperatures (https://doi.org/10.5067/GWYQTF307Y9Y) as the SMAP RFI-filtered antenna temperature (TA) input to the NASA/RSS SMAP Salinity Version 6 retrieval algorithm.  These data have a more conservative RFI flag than the NSIDC L1B Version 5 Brightness Temperatures which were used as input to the previous NASA/RSS SMAP Salinity Version 5 retrieval algorithm.
