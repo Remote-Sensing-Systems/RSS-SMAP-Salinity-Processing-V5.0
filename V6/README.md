@@ -6,7 +6,7 @@ Archive of Processing Code and Support Files for NASA/RSS SMAP Salinity Version 
 In this folder, users will find the routines, subroutines, and tables that have been changed in going from the NASA/RSS SMAP Salinity Version 5.0 Validated Release
 to the NASA/RSS SMAP Salinity Version 6.0 Validated Release.  If a routine, subroutine, or table is not included in this folder (but is available in this folder's [parent directory](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0)), it has not changed between the V5.0 and V6.0 validated releases.  Please see the [ATBD](https://data.remss.com/smap/SSS/V06.0/documents/Release_V6.0.pdf) for full details on updates and improvements in the NASA/RSS SMAP Salinity Version 6.0 Validated Release.
 
-The folders in this directory contain the following files.  NOTE IN ORDER TO RUN THE NASA/RSS SMAP V6 PROCESSING, THE FILES IN THIS SUBDIRECTORY, MUST REPLACE THE APPROPRIATE FILES (NOTED BELOW) IN THE FOLDERS LOCATED IN THE [PARENT DIRECTORY](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0):
+The folders in this directory contain the following files.  NOTE, IN ORDER TO RUN THE NASA/RSS SMAP V6 PROCESSING, THE FILES IN THIS SUBDIRECTORY MUST REPLACE THE APPROPRIATE FILES (NOTED BELOW) IN THE FOLDERS LOCATED IN THE [PARENT DIRECTORY](https://github.com/Remote-Sensing-Systems/RSS-SMAP-Salinity-Processing-V5.0):
 
 
 ## L1B_ingest
