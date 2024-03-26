@@ -21,11 +21,11 @@
 ! 2. Early Mission Biases: De-bias high-rate versus low-rate
 ! 3. Reflected galaxy correction L2C\find_ta_gal_refl_V51.f90
 ! 4. DELTA_TEMP_REFL revised. use different Trefl for V/H
-     !'L2C\fd_delta_temp_refl_V51C.f90'
-     !'L2C\correct_reflector_emissivity_V51C.f90'
+     !'..\L2C\fd_delta_temp_refl_V51C.f90'
+     !'..\L2C\correct_reflector_emissivity_V51C.f90'
 ! 5. sun glint flag
-     !'L2C\sun_qc_flag_V51.f90' 
-     !'L2C\create_l2_qcflag_V53.f90'
+     !'..\L2C\sun_qc_flag_V51.f90' 
+     !'..\L2C\create_l2_qcflag_V53.f90'
 
 ! V5.3 run
 ! 28 MARCH 2023
@@ -134,7 +134,7 @@ include '..\L2C\stokes_converters.f90'
 include '..\L2B\Fdsec2000.f90'    
 include '..\L2A\openbig.f90'
 include '..\L2A\find_month_day.f90'      
-include '..\L2A\fd_date_2000.f90'	
+include '..\L2A\fd_date_2000.f90'   
 include '..\L2A\math_routines.f90'
 
 
@@ -143,7 +143,7 @@ use external_files_L2C_module
 use l2c_module_smap
 
 implicit none
-	
+    
 character(len=250)      ::  filename_l2b
 
 integer(4)              ::  iorbit1,iorbit2
@@ -152,7 +152,7 @@ character(len=5)        ::  corbit1, corbit2
 integer(4)              ::  iorbit,ires_opt,ires
 
 integer(4)              ::  ilat,ilon,idir,ierr,jerr, iflag_sun  
-	
+    
 real(8)                 ::  start_time
 
 real(8)                 ::  secyr,secdy 
@@ -207,7 +207,7 @@ igal_wspd = 2
 call allocate_L2C_arrays
 
 call initialize_APC_V5
-	
+    
 do iorbit=iorbit1,iorbit2 
 
     ! bad orbit check
@@ -237,80 +237,80 @@ do iorbit=iorbit1,iorbit2
     write(*,*)
     write(*,*) ' processing orbit ',iorbit
       
-	call decode_l2b(iorbit,filename_l2b, start_time,ierr)
-	if (ierr/=0) then
-	    write(*,*) iorbit,ierr,' bad orbit'
-	    stop
-	endif
-	
+    call decode_l2b(iorbit,filename_l2b, start_time,ierr)
+    if (ierr/=0) then
+        write(*,*) iorbit,ierr,' bad orbit'
+        stop
+    endif
+    
 
-	call fd_date_2000(start_time, secyr,lyear,idayjl,imon,idaymo,secdy)
-	isecdy=nint(secdy)
-	xhour = secdy/3600.
+    call fd_date_2000(start_time, secyr,lyear,idayjl,imon,idaymo,secdy)
+    isecdy=nint(secdy)
+    xhour = secdy/3600.
 
     ! correct reflector temperature
     call correct_reflector_emissivity_V51 ! new call in V6.0
      
     
-   	winspd=winspd_anc ! this is the CCMP wind speed (for SMAP SSS V3/V4 files)
+    winspd=winspd_anc ! this is the CCMP wind speed (for SMAP SSS V3/V4 files)
     
-  	call fd_ta_earth
-	call fd_tb_toa_lc
-	
-	call fd_tb_sur_sic
-	
-	call fd_ta_expected
-	
+    call fd_ta_earth
+    call fd_tb_toa_lc
+    
+    call fd_tb_sur_sic
+    
+    call fd_ta_expected
+    
     do ilat=1,nlat
-	do ilon=1,nlon
-	do idir=1,2 
-	
-	if(ifill(idir,ilon,ilat) == 0) cycle ! missing observation
-	if (abs(wt_sum(idir,ilon,ilat)-1.0)>0.01) cycle
-	
-	! I use a very conservative land/ice mask for the calbration loop
-	if (gland(idir,ilon,ilat)>0.0005)  cycle
-	if (fland(idir,ilon,ilat)>0.001)   cycle ! changed in V5 from 0.01 to 0.001	
-	
-	! changed in V5
-	if (icezone(ilon,ilat) /= 0) cycle
-	
-	! cut out sun glint
-	! use conservative sun glint from V3.0
-	if (sunglt(idir,ilon,ilat)>=0.0 .and. sunglt(idir,ilon,ilat)<50. .and. alpha(idir,ilon,ilat)>30. .and. alpha(idir,ilon,ilat)<150.) cycle
-	
-	! add new V5.1 sun glint flag
-	call compute_sun_qc(sunglt(idir,ilon,ilat), winspd(ilon,ilat), alpha(idir,ilon,ilat),   iflag_sun)
-	if (iflag_sun /=0) cycle
-	
-	! cut out moonglint
-	if (abs(monglt(idir,ilon,ilat))<15.) cycle	
-	
-	! cut out high galaxy
-	if (ta_gal_ref(1,idir,ilon,ilat)/2.0 > 1.0) cycle	
-	
-	! invalid
-	if (abs(ta_ant_calibrated(1,idir,ilon,ilat)-missing_val4)<0.1) cycle
-	if (abs(ta_ant_calibrated(2,idir,ilon,ilat)-missing_val4)<0.1) cycle
-		
-	if (abs(ta_ant_exp(1,idir,ilon,ilat)-missing_val4)<0.1) cycle
-	if (abs(ta_ant_exp(2,idir,ilon,ilat)-missing_val4)<0.1) cycle
-	
-	! rain filter
-	if (rain(ilon,ilat)>0.1) cycle
+    do ilon=1,nlon
+    do idir=1,2 
+    
+    if(ifill(idir,ilon,ilat) == 0) cycle ! missing observation
+    if (abs(wt_sum(idir,ilon,ilat)-1.0)>0.01) cycle
+    
+    ! I use a very conservative land/ice mask for the calbration loop
+    if (gland(idir,ilon,ilat)>0.0005)  cycle
+    if (fland(idir,ilon,ilat)>0.001)   cycle ! changed in V5 from 0.01 to 0.001 
+    
+    ! changed in V5
+    if (icezone(ilon,ilat) /= 0) cycle
+    
+    ! cut out sun glint
+    ! use conservative sun glint from V3.0
+    if (sunglt(idir,ilon,ilat)>=0.0 .and. sunglt(idir,ilon,ilat)<50. .and. alpha(idir,ilon,ilat)>30. .and. alpha(idir,ilon,ilat)<150.) cycle
+    
+    ! add new V5.1 sun glint flag
+    call compute_sun_qc(sunglt(idir,ilon,ilat), winspd(ilon,ilat), alpha(idir,ilon,ilat),   iflag_sun)
+    if (iflag_sun /=0) cycle
+    
+    ! cut out moonglint
+    if (abs(monglt(idir,ilon,ilat))<15.) cycle  
+    
+    ! cut out high galaxy
+    if (ta_gal_ref(1,idir,ilon,ilat)/2.0 > 1.0) cycle   
+    
+    ! invalid
+    if (abs(ta_ant_calibrated(1,idir,ilon,ilat)-missing_val4)<0.1) cycle
+    if (abs(ta_ant_calibrated(2,idir,ilon,ilat)-missing_val4)<0.1) cycle
+        
+    if (abs(ta_ant_exp(1,idir,ilon,ilat)-missing_val4)<0.1) cycle
+    if (abs(ta_ant_exp(2,idir,ilon,ilat)-missing_val4)<0.1) cycle
+    
+    ! rain filter
+    if (rain(ilon,ilat)>0.1) cycle
  
-	num(1:2)  = num(1:2)  + 1
-	dta(1:2)  = dta(1:2)  + (ta_ant_calibrated(1:2,idir,ilon,ilat) - ta_ant_exp(1:2,idir,ilon,ilat))
-	dta2(1:2) = dta2(1:2) + (ta_ant_calibrated(1:2,idir,ilon,ilat) - ta_ant_exp(1:2,idir,ilon,ilat))**2
-	xta(1:2)  = xta(1:2)  +  ta_ant_exp(1:2,idir,ilon,ilat)
+    num(1:2)  = num(1:2)  + 1
+    dta(1:2)  = dta(1:2)  + (ta_ant_calibrated(1:2,idir,ilon,ilat) - ta_ant_exp(1:2,idir,ilon,ilat))
+    dta2(1:2) = dta2(1:2) + (ta_ant_calibrated(1:2,idir,ilon,ilat) - ta_ant_exp(1:2,idir,ilon,ilat))**2
+    xta(1:2)  = xta(1:2)  +  ta_ant_exp(1:2,idir,ilon,ilat)
 
-	
-	enddo
+    
     enddo
-    enddo	
+    enddo
+    enddo   
 
-	if (num(1) < 2) cycle
-	if (num(2) < 2) cycle
+    if (num(1) < 2) cycle
+    if (num(2) < 2) cycle
 
     dta=dta/num
     dta2=dta2/num
@@ -321,32 +321,32 @@ do iorbit=iorbit1,iorbit2
     write(*,*) ' dta/ta stats:'
     write(*,111) num(1), dta(1), dta2(1), xta(1)
     write(*,111) num(2), dta(2), dta2(2), xta(2)
-   	111 format(1x,i12,1x,3(f10.3,1x))
-   	
-  	    
+    111 format(1x,i12,1x,3(f10.3,1x))
+    
+        
     ! write to direct access file
     do itry = 1,maxtry
             open(unit=ou,file=dtb_statfile,form='binary',status='old',action='write',access='direct',recl=irecl,IOSTAT=iostat) 
-	        write(*,*) iostat
-	        if (iostat/=0) then
-	            call SLEEPQQ(delay)
-	        else ! file is ready to be opened
-	            write(unit=ou,rec=iorbit,iostat=jerr) num(1), start_time, lyear, imon, idaymo, xhour, dta(1:2), dta2(1:2), xta(1:2) 
-	            if (jerr /=0) then
-	                write(*,*) jerr
-	                write(*,*) ' error opening dtb_statfile for writing orbital statistics. pgm stop.'
-	                stop
-	            endif 
+            write(*,*) iostat
+            if (iostat/=0) then
+                call SLEEPQQ(delay)
+            else ! file is ready to be opened
+                write(unit=ou,rec=iorbit,iostat=jerr) num(1), start_time, lyear, imon, idaymo, xhour, dta(1:2), dta2(1:2), xta(1:2) 
+                if (jerr /=0) then
+                    write(*,*) jerr
+                    write(*,*) ' error opening dtb_statfile for writing orbital statistics. pgm stop.'
+                    stop
+                endif 
                 close(ou)
                 write(*,*) ' dtb_statfile updated.'
                 write(*,*) 
                 exit
             endif        
     enddo ! try to open direct access files
-	
+    
     109 continue
 
-enddo ! iorbit	
+enddo ! iorbit  
 
 stop ' normal end PERFORM_OCEAN_TARGET_CALIBRATION'
 end program PERFORM_OCEAN_TARGET_CALIBRATION
